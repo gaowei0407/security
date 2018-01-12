@@ -1,0 +1,15 @@
+/*.idea/
+/*.setting/
+*.iml
+*.settings
+logs/
+META-INF
+*/.metadata/
+*/.classpath
+*/.project
+.gitignore.bak
+*.classpath
+*.project
+security/.idea/
+security/target/
+target/

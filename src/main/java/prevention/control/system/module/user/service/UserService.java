@@ -1,0 +1,22 @@
+package prevention.control.system.module.user.service;
+
+import prevention.control.system.common.publicEntity.Pagination;
+import prevention.control.system.module.user.entity.User;
+
+/**
+ * Created by 董振 on 2018/1/11.
+ */
+public interface UserService {
+    /**
+     * 查询用户信息
+     * @param userId
+     * @return
+     */
+    User queryUserById(Integer userId);
+
+    /**
+     * 查询所有的用户
+     * @return
+     */
+    Pagination<User> queryAllUser(int pageSize, int pageNo);
+}
