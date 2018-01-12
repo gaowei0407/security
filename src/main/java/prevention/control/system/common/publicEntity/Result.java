@@ -142,6 +142,6 @@ public class Result implements Serializable {
 
     @Override
     public String toString() {
-        return "OldResult [code=" + code + ", message=" + message + ", subCode=" + subCode + ", subMessage=" + subMessage + ", data=" + data + "]";
+        return "Result [code=" + code + ", message=" + message + ", subCode=" + subCode + ", subMessage=" + subMessage + ", data=" + data + "]";
     }
 }

@@ -9,6 +9,8 @@ import prevention.control.system.common.publicEntity.Pagination;
 import prevention.control.system.module.user.dao.UserMapper;
 import prevention.control.system.module.user.entity.User;
 import prevention.control.system.module.user.service.UserService;
+
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,7 +20,7 @@ import java.util.List;
 @Transactional(readOnly = false)
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     public User queryUserById(Integer userId) {

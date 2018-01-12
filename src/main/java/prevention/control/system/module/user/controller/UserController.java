@@ -12,6 +12,8 @@ import prevention.control.system.common.publicEntity.Result;
 import prevention.control.system.common.publicEntity.ResultCodeMessage;
 import prevention.control.system.module.user.entity.User;
 import prevention.control.system.module.user.service.UserService;
+import prevention.control.system.module.user.service.impl.UserServiceImpl;
+
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,8 +25,7 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    private static Logger logger = LoggerFactory
-            .getLogger(UserController.class);
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Resource(name = "userServiceImpl")
     private UserService userService;

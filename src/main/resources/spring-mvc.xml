@@ -14,15 +14,31 @@
 
     <description>Spring MVC Configuration</description>
 
-    <!-- 扫描controller（controller层注入） -->
-    <mvc:annotation-driven></mvc:annotation-driven>
-
     <!-- 设置使用注解的类所在的jar包 -->
     <!-- 使用Annotation自动注册Bean,只扫描@Controller -->
     <context:component-scan base-package="prevention.control.system.module"
                             use-default-filters="false"><!-- base-package 如果多个，用“,”分隔 -->
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8"/>
+            </bean>
+            <!-- 注释掉jackson 序列化返回值 -->
+            <!-- 将Jackson2HttpMessageConverter的默认格式化输出为false -->
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+                <property name="prettyPrint" value="false"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!-- 访问到静态的文件-->
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
