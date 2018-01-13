@@ -99,5 +99,4 @@
             <bean class="prevention.control.system.common.Interceptor.BaseInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
-
 </beans>

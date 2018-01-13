@@ -19,4 +19,10 @@ public interface UserService {
      * @return
      */
     Pagination<User> queryAllUser(int pageSize, int pageNo);
+
+    /**
+     * 查询所有的用户
+     * @return
+     */
+    boolean updateUserInfo(Integer userId, String userName, String password);
 }
