@@ -1,5 +1,6 @@
 package prevention.control.system.module.user.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,10 @@ public class UserController {
         String password = null;
         if (!Objects.isNull(map.get("password"))) {
             password = map.get("password").toString();
+        }
+        if(StringUtils.isEmpty(userName) && StringUtils.isEmpty(password)){
+            result.executeSuccess(ResultCodeMessage.UPDATED_SUCCESS_MESSAGE);
+            return result;
         }
         boolean bool = userService.updateUserInfo(userId, userName, password);
         if (bool == false) {
