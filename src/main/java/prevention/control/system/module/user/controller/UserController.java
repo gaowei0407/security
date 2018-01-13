@@ -2,6 +2,8 @@ package prevention.control.system.module.user.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +29,8 @@ import java.util.Objects;
 public class UserController {
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @Resource(name = "userServiceImpl")
+    @Autowired
+    @Qualifier("userServiceImpl")
     private UserService userService;
 
     @RequestMapping(value = "/queryUser", method = {RequestMethod.POST})
@@ -67,6 +70,34 @@ public class UserController {
         paramsList.put("allUser", userPagination);
         result.setData(paramsList);
         result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
+        return result;
+    }
+
+    @RequestMapping("/updateUserInfo")
+    public Result updateUserName(@RequestBody(required = false) RequestParams requestParams){
+        // 获取当前方法名
+        String method = Thread.currentThread() .getStackTrace()[1].getMethodName();
+        Result result = new Result(method);
+        Map<String, Object> map = requestParams.getMap();
+        if (Objects.isNull(map.get("userId"))) {
+            result.paramsError(ResultCodeMessage.PARAMS_FAIL_MESSAGE);
+            return result;
+        }
+        Integer userId = Integer.parseInt(map.get("userId").toString());
+        String userName = null;
+        if (!Objects.isNull(map.get("userName"))) {
+            userName = map.get("userName").toString();
+        }
+        String password = null;
+        if (!Objects.isNull(map.get("password"))) {
+            password = map.get("password").toString();
+        }
+        boolean bool = userService.updateUserInfo(userId, userName, password);
+        if (bool == false) {
+            result.setSubCode(ResultCodeMessage.EXECUTE_FAIL_CODE);
+            result.setSubMessage(ResultCodeMessage.EXECUTE_FAIL_MESSAGE);
+        }
+        result.executeSuccess(ResultCodeMessage.UPDATED_SUCCESS_MESSAGE);
         return result;
     }
 }

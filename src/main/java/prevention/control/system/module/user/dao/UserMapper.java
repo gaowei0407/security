@@ -23,4 +23,10 @@ public interface UserMapper {
      * @return
      */
     List<User> selectAllUser();
+
+    /**
+     * 查询所有的用户信息
+     * @return
+     */
+    int updateUserInfo(@Param("userId") Integer userId, @Param("userName") String userName, @Param("password") String password);
 }
