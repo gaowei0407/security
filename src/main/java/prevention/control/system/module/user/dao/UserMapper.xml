@@ -8,4 +8,17 @@
     <select id="selectAllUser" resultType="prevention.control.system.module.user.entity.User">
         SELECT * FROM t_user
     </select>
+
+    <update id="updateUserInfo">
+        UPDATE t_user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+        </set>
+         WHERE user_id = #{userId}
+    </update>
 </mapper>
