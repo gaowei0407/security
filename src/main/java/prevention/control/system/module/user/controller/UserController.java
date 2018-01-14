@@ -105,4 +105,25 @@ public class UserController {
         result.executeSuccess(ResultCodeMessage.UPDATED_SUCCESS_MESSAGE);
         return result;
     }
+
+    @RequestMapping("/registerUserInfo")
+    public Result registerUserInfo(@RequestBody(required = false) RequestParams requestParams){
+        // 获取当前方法名
+        String method = Thread.currentThread() .getStackTrace()[1].getMethodName();
+        Result result = new Result(method);
+        Map<String, Object> map = requestParams.getMap();
+        if (Objects.isNull(map.get("username"))||Objects.isNull(map.get("password"))) {
+            result.paramsError(ResultCodeMessage.PARAMS_FAIL_MESSAGE);
+            return result;
+        }
+        String userName=map.get("username").toString();
+        String password=map.get("password").toString();
+        boolean bool = userService.registerUserInfo( userName, password);
+        if (bool == false) {
+            result.setSubCode(ResultCodeMessage.EXECUTE_FAIL_CODE);
+            result.setSubMessage(ResultCodeMessage.EXECUTE_FAIL_MESSAGE);
+        }
+        result.executeSuccess(ResultCodeMessage.ADD_SUCCESS_MESSAGE);
+        return result;
+    }
 }

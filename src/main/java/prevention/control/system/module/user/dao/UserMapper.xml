@@ -21,4 +21,7 @@
         </set>
          WHERE user_id = #{userId}
     </update>
+    <insert id="registerUserInfo">
+        insert into t_user(user_name,password) value (#{userName},#{password})
+    </insert>
 </mapper>

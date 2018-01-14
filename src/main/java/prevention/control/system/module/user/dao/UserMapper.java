@@ -29,4 +29,10 @@ public interface UserMapper {
      * @return
      */
     int updateUserInfo(@Param("userId") Integer userId, @Param("userName") String userName, @Param("password") String password);
+
+    /**
+     * 注册用户信息
+     * @return
+     */
+    int registerUserInfo( @Param("userName") String userName, @Param("password") String password);
 }
