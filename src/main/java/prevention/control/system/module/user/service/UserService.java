@@ -25,4 +25,10 @@ public interface UserService {
      * @return
      */
     boolean updateUserInfo(Integer userId, String userName, String password);
+
+    /**
+     * 注册用户信息
+     * @return
+     */
+    boolean registerUserInfo( String userName, String password);
 }

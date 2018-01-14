@@ -44,4 +44,13 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    @Override
+    public boolean registerUserInfo(String userName, String password) {
+        int register = userMapper.registerUserInfo(userName, password);
+        if (register == 1) {
+            return true;
+        }
+        return false;
+    }
 }
