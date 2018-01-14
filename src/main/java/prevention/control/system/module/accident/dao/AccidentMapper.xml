@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="prevention.control.system.module.accident.dao.AccidentMapper">
+    <select id="selectCategoryName"  resultType="prevention.control.system.module.accident.entity.AccidentCategory">
+        SELECT * FROM t_accident_category
+    </select>
+
+    <select id="selectAllAccident"  resultType="prevention.control.system.module.accident.entity.Accident">
+        SELECT * FROM t_accident
+    </select>
+
+    <select id="selectAccidentByName"  resultType="prevention.control.system.module.accident.entity.Accident">
+        SELECT * FROM t_accident where accident_name LIKE "%"#{accidentName}"%"
+    </select>
+
+    <insert id="insertAccident">
+     INSERT INTO t_accident(accident_name,occurrence_place,occurrence_time,is_analysis,user_id,accident_category_id) VALUE (#{accidentName},#{occurrencePlace},#{occurrenceTime},#{isAnalysis},#{userId},#{accidentCategoryId})
+    </insert>
+</mapper>
