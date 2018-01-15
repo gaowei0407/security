@@ -13,3 +13,5 @@ META-INF
 security/.idea/
 security/target/
 target/
+basename.exe.stackdump/
+sh.exe.stackdump/
