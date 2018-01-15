@@ -1,0 +1,27 @@
+@charset "utf-8";
+html, body, div, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, pre, form, p, blockquote, fieldset, input, abbr, article, aside, command, details, figcaption, figure, footer, header, hgroup, mark, meter, nav, output, progress, section, summary, time {margin: 0;
+padding: 0; font-size:16px;}
+body{font-family:Arial, Helvetica, sans-serif, "新宋体";}
+ul li,ol li{ list-style:none;}
+/* p{ font-size:12px; font-weight:normal; font-style:normal; text-decoration:none; color:#6c6c6c;} */
+table {border-collapse: collapse;border-spacing: 0;}
+input{ outline:none; border:none;}
+img{ vertical-align:middle;}
+a{cursor:pointer;}
+.clearfix:after{ content:''; display:block; clear:both;}
+.clearfix{ zoom:1;}
+.fl{
+	float: left;
+}
+.fr{
+	float:right;
+}
+.fr1{
+	left:1000px;
+}
+.none{
+	display:none;
+}
+.block{
+	display:block;
+}
