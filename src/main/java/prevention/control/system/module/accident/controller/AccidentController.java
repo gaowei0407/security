@@ -14,7 +14,6 @@ import prevention.control.system.common.publicEntity.ResultCodeMessage;
 import prevention.control.system.module.accident.entity.Accident;
 import prevention.control.system.module.accident.entity.AccidentCategory;
 import prevention.control.system.module.accident.service.AccidentService;
-import prevention.control.system.module.user.entity.User;
 
 import java.text.ParseException;
 import java.util.HashMap;
@@ -36,16 +35,15 @@ public class AccidentController {
 
 
 
-    @RequestMapping("/queryAllAccidentcategory")
-    public Result queryAllAccidentcategory(@RequestBody(required = false) RequestParams requestParams){
+    @RequestMapping("/queryAllAccidentCategory")
+    public Result queryAllAccidentCategory(@RequestBody(required = false) RequestParams requestParams){
         // 获取当前方法名
         String method = Thread.currentThread() .getStackTrace()[1].getMethodName();
         Result result = new Result(method);
         Map<String, Object> map = requestParams.getMap();
-        List<AccidentCategory> accidentPagination = accidentService.queryAllaccidentcategory();
-        System.out.println("accidentPagination"+accidentPagination.toString());
+        List<AccidentCategory> accidentPagination = accidentService.queryAllAccidentCategory();
         Map<String, Object> paramsList = new HashMap<>();
-        paramsList.put("allaccidentcategory", accidentPagination);
+        paramsList.put("AllAccidentCategory", accidentPagination);
         result.setData(paramsList);
         result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
         return result;
@@ -65,7 +63,7 @@ public class AccidentController {
         int pageNo = Integer.parseInt(map.get("pageNo").toString());
         Pagination<Accident> accidentPagination = accidentService.queryAllAccident(pageSize,pageNo);
         Map<String, Object> paramsList = new HashMap<>();
-        paramsList.put("allaccidentcategory", accidentPagination);
+        paramsList.put("AllAccidentCategory", accidentPagination);
         result.setData(paramsList);
         result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
         return result;
@@ -110,16 +108,21 @@ public class AccidentController {
 
         try {
             int  sucess = accidentService.addAccident(map);
+            if (sucess==0){
+                result.setSubCode(ResultCodeMessage.EXECUTE_FAIL_CODE);
+                result.setSubMessage(ResultCodeMessage.EXECUTE_FAIL_MESSAGE);
+                return result;
+            }
             Map<String, Object> paramsList = new HashMap<>();
-            paramsList.put("allaccidentcategory", sucess);
+            paramsList.put("isSuccess", sucess);
             result.setData(paramsList);
-        }catch (ParseException p){
-
+            result.executeSuccess(ResultCodeMessage.ADD_SUCCESS_MESSAGE);
         }catch (Exception e){
-
+            System.err.println("添加事故失败,原因:"+e.toString());
+            result.setSubCode(ResultCodeMessage.EXECUTE_FAIL_CODE);
+            result.setSubMessage(ResultCodeMessage.EXECUTE_FAIL_MESSAGE);
+            return result;
         }
-
-        result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
         return result;
     }
 }

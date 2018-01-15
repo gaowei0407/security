@@ -18,7 +18,7 @@ public interface AccidentService {
      * 查询所有事故类别
      * @return
      */
-   List<AccidentCategory> queryAllaccidentcategory();
+   List<AccidentCategory> queryAllAccidentCategory();
 
     /**
      * 查询所有事故基本信息
