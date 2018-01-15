@@ -2,6 +2,7 @@ package prevention.control.system.module.accident.service.imp;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
 import org.springframework.stereotype.Service;
 import prevention.control.system.module.accident.dao.AccidentMapper;
 import prevention.control.system.module.accident.entity.Accident;
@@ -27,11 +28,13 @@ public class AccidentServiceImpl implements AccidentService {
     private AccidentMapper accidentMapper;
 
 
+
+
+
     @Override
-    public List<AccidentCategory> queryAllaccidentcategory() {
-        List<AccidentCategory> selectcategoryname = accidentMapper.selectCategoryName();
-        System.out.println("selectcategoryname"+selectcategoryname.toString());
-        return selectcategoryname;
+    public List<AccidentCategory> queryAllAccidentCategory() {
+        List<AccidentCategory> selectCategoryName = accidentMapper.selectCategoryName();
+        return selectCategoryName;
     }
 
     @Override
@@ -41,7 +44,6 @@ public class AccidentServiceImpl implements AccidentService {
         List<Accident> accidents = accidentMapper.selectAllAccident();
         PageInfo<Accident> pageInfo = new PageInfo<Accident>(accidents);
         return new Pagination<Accident>(pageInfo.getTotal(), pageInfo.getList());
-        //return null;
     }
 
     @Override
@@ -60,10 +62,46 @@ public class AccidentServiceImpl implements AccidentService {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-M-dd HH:mm:ss");
         Date occurrenceTime =format.parse(map.get("occurrenceTime").toString());//发生时间
+
         int isAnalysis= Integer.parseInt(map.get("isAnalysis").toString());//是否完成分析
+
         int userId=Integer.parseInt(map.get("userId").toString());//用户id
+
         int accidentCategoryId=Integer.parseInt(map.get("accidentCategoryId").toString());//事故类别id
-        accidentMapper.insertAccident(accidentName,occurrencePlace,occurrenceTime,isAnalysis,userId,accidentCategoryId);
-        return 0;
+
+        String reportContent=map.get("reportContent").toString();//事故调查报告内容
+
+        String behaviorContent=map.get("behaviorContent").toString();//行为原因内容
+
+        String macroscopicContent=map.get("macroscopicContent").toString();//事故宏观规律内容
+
+        String measuresContent=map.get("measuresContent").toString();//事故预防措施内容
+
+        String reasonsContent=map.get("reasonsContent").toString();//事故原因规律内容
+        //向事故基本信息表中插入信息
+        Accident accident=new Accident();
+        accident.setAccidentCategoryId(accidentCategoryId);
+        accident.setAccidentName(accidentName);
+        accident.setIsAnalysis(isAnalysis);
+        accident.setOccurrencePlace(occurrencePlace);
+        accident.setOccurrenceTime(occurrenceTime);
+        accident.setUserId(userId);
+        int accidentCount= accidentMapper.insertAccident(accident);
+        System.out.println("accident=="+accident.getAccidentId());
+        //向事故调查报告表中插入信息
+        int report=accidentMapper.insertAccidentInvestigationReport(accident.getAccidentId(),reportContent);
+        System.out.println("report=="+report);
+        //向事故行为原因中插入数据
+        int reason=accidentMapper.insertAnalysisOfTheCauseOfBehavior(accident.getAccidentId(),behaviorContent);
+        //向事故宏观规律表中插入数据
+        int macroscopIc=accidentMapper.insertMacroscopicLawOfAccident(accident.getAccidentId(),macroscopicContent);
+        //向事故预防措施
+        int measures=accidentMapper.insertPreventionAndControlMeasures(accident.getAccidentId(),measuresContent);
+        //向事故原因规律表中插入数据
+        int causeLaw=accidentMapper.insertStatisticsOfReasons(accident.getAccidentId(),reasonsContent);
+        if (accidentCount==0||report==0||reason==0||macroscopIc==0||measures==0||causeLaw==0){
+            return 0;
+        }
+        return 1;
     }
 }

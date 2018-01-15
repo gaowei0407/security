@@ -13,7 +13,24 @@
         SELECT * FROM t_accident where accident_name LIKE "%"#{accidentName}"%"
     </select>
 
-    <insert id="insertAccident">
-     INSERT INTO t_accident(accident_name,occurrence_place,occurrence_time,is_analysis,user_id,accident_category_id) VALUE (#{accidentName},#{occurrencePlace},#{occurrenceTime},#{isAnalysis},#{userId},#{accidentCategoryId})
+    <insert id="insertAccident"  useGeneratedKeys="true" keyProperty="accident.accidentId">
+     INSERT INTO t_accident(accident_name,occurrence_place,occurrence_time,is_analysis,user_id,accident_category_id) VALUE (#{accident.accidentName},#{accident.occurrencePlace},#{accident.occurrenceTime},#{accident.isAnalysis},#{accident.userId},#{accident.accidentCategoryId})
     </insert>
+    <insert id="insertAccidentInvestigationReport">
+        INSERT INTO t_accident_investigation_report(accident_id,content) VALUE (#{accidentId},#{reportContent})
+    </insert>
+    <insert id="insertAnalysisOfTheCauseOfBehavior">
+        INSERT INTO t_analysis_of_the_cause_of_behavior(accident_id,content) VALUE (#{accidentId},#{behaviorContent})
+    </insert>
+
+    <insert id="insertMacroscopicLawOfAccident">
+        INSERT INTO t_macroscopic_law_of_accident(accident_id,content) VALUE (#{accidentId},#{macroscopicContent})
+    </insert>
+    <insert id="insertPreventionAndControlMeasures">
+        INSERT INTO t_prevention_and_control_measures(accident_id,content) VALUE (#{accidentId},#{measuresContent})
+    </insert>
+    <insert id="insertStatisticsOfReasons">
+        INSERT INTO t_statistics_of_reasons(accident_id,content) VALUE (#{accidentId},#{reasonsContent})
+    </insert>
+
 </mapper>
