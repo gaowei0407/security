@@ -65,7 +65,7 @@ public class AccidentController {
         int pageNo = Integer.parseInt(map.get("pageNo").toString());
         Pagination<Accident> accidentPagination = accidentService.queryAllAccident(pageSize,pageNo);
         Map<String, Object> paramsList = new HashMap<>();
-        paramsList.put("allaccidentcategory", accidentPagination);
+        paramsList.put("accidentList", accidentPagination);
         result.setData(paramsList);
         result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
         return result;
