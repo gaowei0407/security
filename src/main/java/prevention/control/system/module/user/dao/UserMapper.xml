@@ -24,4 +24,8 @@
     <insert id="registerUserInfo">
         insert into t_user(user_name,password) value (#{userName},#{password})
     </insert>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="userId">
+        
+    </insert>
 </mapper>
