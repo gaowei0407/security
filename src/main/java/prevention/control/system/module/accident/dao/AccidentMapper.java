@@ -2,8 +2,7 @@ package prevention.control.system.module.accident.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import prevention.control.system.module.accident.entity.Accident;
-import prevention.control.system.module.accident.entity.AccidentCategory;
+import prevention.control.system.module.accident.entity.*;
 
 import java.util.Date;
 import java.util.List;
@@ -19,11 +18,18 @@ public interface AccidentMapper {
      */
     List<AccidentCategory>  selectCategoryName();
 
+
     /**
      * 查询所有事故基本信息
      * @return
      */
     List<Accident>  selectAllAccident();
+
+    /**
+     * 根据事故类别id查询所有事故基本信息
+     * @return
+     */
+    List<Accident>  selectAllAccidentByCategoryId(@Param("accidentCategoryId") String accidentCategoryId);
 
     /**
      * 根据事故名称查询事故基本信息
@@ -67,5 +73,35 @@ public interface AccidentMapper {
      * @return
      */
     int insertStatisticsOfReasons(@Param("accidentId")long accidentId,@Param("reasonsContent") String behaviorContent);
+
+    /**
+     * 根据事故id查询事故报告
+     * @return
+     */
+    List<accidentInvestigationReport>  selectAccidentInvestigationReportByAccidentId(@Param("accidentId") String accidentId);
+
+    /**
+     * 根据事故id查询事故原因
+     * @return
+     */
+    List<analysisOfTheCauseOfBehavior>  selectAnalysisOfTheCauseOfBehaviorByAccidentId(@Param("accidentId") String accidentId);
+
+    /**
+     * 根据事故id查询事故宏观规律
+     * @return
+     */
+    List<macroscopicLawOfAccident>  selectMacroscopicLawOfAccidentByAccidentId(@Param("accidentId") String accidentId);
+
+    /**
+     * 根据事故id查询事故预防措施
+     * @return
+     */
+    List<preventionAndControlMeasures>  selectPreventionAndControlMeasuresByAccidentId(@Param("accidentId") String accidentId);
+
+    /**
+     * 根据事故id查询事故宏观规律统计
+     * @return
+     */
+    List<statisticsOfReasons>  selectStatisticsOfReasonsByAccidentId(@Param("accidentId") String accidentId);
 
 }
