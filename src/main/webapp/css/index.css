@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+
+#north_title{
+	font-size: 30px;
+	color: #fff;
+	text-align: center;
+	background: url(../images/title-banner.png) no-repeat ;
+}
+#west_menus ul li{
+	font-size: 14px;
+	color: #0E2D5F;
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid red;
+	background-color: aquamarine;
+	margin-top: 5px;
+	text-align: center;
+}
+
+table#main_accident_add_table tr td {
+	height: 30px;
+	width: 50%;
+	border:1px solid red;
+	background-color: red;
+}
+
+table#main_accident_add_table{
+	border:1px solid red;
+}
+.inputname{
+	text-align: right;
+}

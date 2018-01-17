@@ -25,19 +25,19 @@ public interface AccidentService {
      * 查询所有事故基本信息
      * @return
      */
-    Pagination<Accident> queryAllAccident(int pageSize,int PageNo);
+    Pagination<Accident> queryAllAccident(int pageSize, int PageNo);
 
     /**
      * 事故类别id查询事故基本信息
      * @return
      */
-    Pagination<Accident> queryAllAccidentByCategoryId(int pageSize,int PageNo,String accidentCategoryId);
+    Pagination<Accident> queryAllAccidentByCategoryId(int pageSize, int PageNo, String accidentCategoryId);
 
     /**
      * 根据事故名称查询事故基本信息
      * @return
      */
-    Pagination<Accident> selectAccidentByName(int pageSize,int PageNo,String accidentName);
+    Pagination<Accident> selectAccidentByName(int pageSize, int PageNo, String accidentName);
 
 
     /**
