@@ -9,6 +9,10 @@
         SELECT * FROM t_accident
     </select>
 
+    <select id="selectAllAccidentByCategoryId"  resultType="prevention.control.system.module.accident.entity.Accident">
+        SELECT * FROM t_accident where accident_category_id = #{accidentCategoryId}
+    </select>
+
     <select id="selectAccidentByName"  resultType="prevention.control.system.module.accident.entity.Accident">
         SELECT * FROM t_accident where accident_name LIKE "%"#{accidentName}"%"
     </select>
@@ -26,11 +30,34 @@
     <insert id="insertMacroscopicLawOfAccident">
         INSERT INTO t_macroscopic_law_of_accident(accident_id,content) VALUE (#{accidentId},#{macroscopicContent})
     </insert>
+
     <insert id="insertPreventionAndControlMeasures">
         INSERT INTO t_prevention_and_control_measures(accident_id,content) VALUE (#{accidentId},#{measuresContent})
     </insert>
+
     <insert id="insertStatisticsOfReasons">
         INSERT INTO t_statistics_of_reasons(accident_id,content) VALUE (#{accidentId},#{reasonsContent})
     </insert>
+
+    <select id="selectAccidentInvestigationReportByAccidentId" resultType="prevention.control.system.module.accident.entity.accidentInvestigationReport">
+        SELECT * FROM t_accident_investigation_report where accident_id = #{accidentId}
+    </select>
+
+    <select id="selectAnalysisOfTheCauseOfBehaviorByAccidentId" resultType="prevention.control.system.module.accident.entity.analysisOfTheCauseOfBehavior">
+        SELECT * FROM t_analysis_of_the_cause_of_behavior where accident_id = #{accidentId}
+    </select>
+
+    <select id="selectMacroscopicLawOfAccidentByAccidentId" resultType="prevention.control.system.module.accident.entity.macroscopicLawOfAccident">
+        SELECT * FROM t_macroscopic_law_of_accident where accident_id = #{accidentId}
+    </select>
+
+    <select id="selectPreventionAndControlMeasuresByAccidentId" resultType="prevention.control.system.module.accident.entity.preventionAndControlMeasures">
+        SELECT * FROM t_prevention_and_control_measures where accident_id = #{accidentId}
+    </select>
+
+    <select id="selectStatisticsOfReasonsByAccidentId" resultType="prevention.control.system.module.accident.entity.statisticsOfReasons">
+        SELECT * FROM t_statistics_of_reasons where accident_id = #{accidentId}
+    </select>
+
 
 </mapper>

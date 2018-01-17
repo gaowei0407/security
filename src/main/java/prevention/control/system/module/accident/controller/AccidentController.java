@@ -11,11 +11,9 @@ import prevention.control.system.common.publicEntity.Pagination;
 import prevention.control.system.common.publicEntity.RequestParams;
 import prevention.control.system.common.publicEntity.Result;
 import prevention.control.system.common.publicEntity.ResultCodeMessage;
-import prevention.control.system.module.accident.entity.Accident;
-import prevention.control.system.module.accident.entity.AccidentCategory;
+import prevention.control.system.module.accident.entity.*;
 import prevention.control.system.module.accident.service.AccidentService;
 
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +47,7 @@ public class AccidentController {
         return result;
     }
 
+
     @RequestMapping("/queryAllAccident")
     public Result queryAllAccident(@RequestBody(required = false) RequestParams requestParams){
         // 获取当前方法名
@@ -62,6 +61,27 @@ public class AccidentController {
         int pageSize = Integer.parseInt(map.get("pageSize").toString());
         int pageNo = Integer.parseInt(map.get("pageNo").toString());
         Pagination<Accident> accidentPagination = accidentService.queryAllAccident(pageSize,pageNo);
+        Map<String, Object> paramsList = new HashMap<>();
+        paramsList.put("accidentList", accidentPagination);
+        result.setData(paramsList);
+        result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
+        return result;
+    }
+
+    @RequestMapping("/queryAllAccidentByCategoryId")
+    public Result queryAllAccidentByCategoryId(@RequestBody(required = false) RequestParams requestParams){
+        // 获取当前方法名
+        String method = Thread.currentThread() .getStackTrace()[1].getMethodName();
+        Result result = new Result(method);
+        Map<String, Object> map = requestParams.getMap();
+        if(Objects.isNull(map.get("pageSize")) || Objects.isNull(map.get("pageNo"))) {
+            result.paramsError(ResultCodeMessage.PARAMS_FAIL_MESSAGE);
+            return result;
+        }
+        int pageSize = Integer.parseInt(map.get("pageSize").toString());
+        int pageNo = Integer.parseInt(map.get("pageNo").toString());
+        String accidentCategoryId=map.get("accidentCategoryId").toString();
+        Pagination<Accident> accidentPagination = accidentService.queryAllAccidentByCategoryId(pageSize,pageNo,accidentCategoryId);
         Map<String, Object> paramsList = new HashMap<>();
         paramsList.put("accidentList", accidentPagination);
         result.setData(paramsList);
@@ -123,6 +143,102 @@ public class AccidentController {
             result.setSubMessage(ResultCodeMessage.EXECUTE_FAIL_MESSAGE);
             return result;
         }
+        return result;
+    }
+
+    @RequestMapping("/queryInvestigationReportByAccidentId")
+    public Result queryInvestigationReportByAccidentId(@RequestBody(required = false) RequestParams requestParams){
+        // 获取当前方法名
+        String method = Thread.currentThread() .getStackTrace()[1].getMethodName();
+        Result result = new Result(method);
+        Map<String, Object> map = requestParams.getMap();
+        if (Objects.isNull(map.get("accidentId"))){
+            result.paramsError(ResultCodeMessage.PARAMS_FAIL_MESSAGE);
+            return result;
+        }
+        String accidentId=map.get("accidentId").toString();
+        List<accidentInvestigationReport> accidentReport= accidentService.queryAccidentInvestigationReportByAccidentId(accidentId);
+        Map<String, Object> paramsList = new HashMap<>();
+        paramsList.put("accidentReport", accidentReport);
+        result.setData(paramsList);
+        result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
+        return result;
+    }
+
+    @RequestMapping("/queryAnalysisOfTheCauseOfBehaviorByAccidentId")
+    public Result queryAnalysisOfTheCauseOfBehaviorByAccidentId(@RequestBody(required = false) RequestParams requestParams){
+        // 获取当前方法名
+        String method = Thread.currentThread() .getStackTrace()[1].getMethodName();
+        Result result = new Result(method);
+        Map<String, Object> map = requestParams.getMap();
+        if (Objects.isNull(map.get("accidentId"))){
+            result.paramsError(ResultCodeMessage.PARAMS_FAIL_MESSAGE);
+            return result;
+        }
+        String accidentId=map.get("accidentId").toString();
+        List<analysisOfTheCauseOfBehavior> accidentReason= accidentService.queryAnalysisOfTheCauseOfBehaviorByAccidentId(accidentId);
+        Map<String, Object> paramsList = new HashMap<>();
+        paramsList.put("accidentReason", accidentReason);
+        result.setData(paramsList);
+        result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
+        return result;
+    }
+
+    @RequestMapping("/queryMacroscopicLawOfAccidentByAccidentId")
+    public Result queryMacroscopicLawOfAccidentByAccidentId(@RequestBody(required = false) RequestParams requestParams){
+        // 获取当前方法名
+        String method = Thread.currentThread() .getStackTrace()[1].getMethodName();
+        Result result = new Result(method);
+        Map<String, Object> map = requestParams.getMap();
+        if (Objects.isNull(map.get("accidentId"))){
+            result.paramsError(ResultCodeMessage.PARAMS_FAIL_MESSAGE);
+            return result;
+        }
+        String accidentId=map.get("accidentId").toString();
+        List<macroscopicLawOfAccident> accidentMacroscopicLaw= accidentService.queryMacroscopicLawOfAccidentByAccidentId(accidentId);
+        Map<String, Object> paramsList = new HashMap<>();
+        paramsList.put("accidentMacroscopicLaw", accidentMacroscopicLaw);
+        result.setData(paramsList);
+        result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
+        return result;
+    }
+
+
+    @RequestMapping("/queryPreventionAndControlMeasuresByAccidentId")
+    public Result queryPreventionAndControlMeasuresByAccidentId(@RequestBody(required = false) RequestParams requestParams){
+        // 获取当前方法名
+        String method = Thread.currentThread() .getStackTrace()[1].getMethodName();
+        Result result = new Result(method);
+        Map<String, Object> map = requestParams.getMap();
+        if (Objects.isNull(map.get("accidentId"))){
+            result.paramsError(ResultCodeMessage.PARAMS_FAIL_MESSAGE);
+            return result;
+        }
+        String accidentId=map.get("accidentId").toString();
+        List<preventionAndControlMeasures> accidentPreventionAndControl= accidentService.queryPreventionAndControlMeasuresByAccidentId(accidentId);
+        Map<String, Object> paramsList = new HashMap<>();
+        paramsList.put("accidentPreventionAndControl", accidentPreventionAndControl);
+        result.setData(paramsList);
+        result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
+        return result;
+    }
+
+    @RequestMapping("/queryStatisticsOfReasonsByAccidentId")
+    public Result queryStatisticsOfReasonsByAccidentId(@RequestBody(required = false) RequestParams requestParams){
+        // 获取当前方法名
+        String method = Thread.currentThread() .getStackTrace()[1].getMethodName();
+        Result result = new Result(method);
+        Map<String, Object> map = requestParams.getMap();
+        if (Objects.isNull(map.get("accidentId"))){
+            result.paramsError(ResultCodeMessage.PARAMS_FAIL_MESSAGE);
+            return result;
+        }
+        String accidentId=map.get("accidentId").toString();
+        List<statisticsOfReasons> accidentStatisticsOfReasons= accidentService.queryStatisticsOfReasonsByAccidentId(accidentId);
+        Map<String, Object> paramsList = new HashMap<>();
+        paramsList.put("accidentStatisticsOfReasons", accidentStatisticsOfReasons);
+        result.setData(paramsList);
+        result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
         return result;
     }
 }
