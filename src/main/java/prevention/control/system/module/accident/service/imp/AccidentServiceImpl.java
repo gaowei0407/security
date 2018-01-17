@@ -2,14 +2,11 @@ package prevention.control.system.module.accident.service.imp;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
 import org.springframework.stereotype.Service;
 import prevention.control.system.module.accident.dao.AccidentMapper;
-import prevention.control.system.module.accident.entity.Accident;
-import prevention.control.system.module.accident.entity.AccidentCategory;
+import prevention.control.system.module.accident.entity.*;
 import prevention.control.system.module.accident.service.AccidentService;
 import prevention.control.system.common.publicEntity.Pagination;
-import prevention.control.system.module.user.entity.User;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -37,6 +34,7 @@ public class AccidentServiceImpl implements AccidentService {
         return selectCategoryName;
     }
 
+
     @Override
     public Pagination<Accident> queryAllAccident(int pageSize,int pageNo) {
         // 处理分页
@@ -47,10 +45,10 @@ public class AccidentServiceImpl implements AccidentService {
     }
 
     @Override
-    public Pagination<Accident> selectAccidentById(int pageSize, int pageNo, String accident_category_id) {
+    public Pagination<Accident> queryAllAccidentByCategoryId(int pageSize,int pageNo,String accidentCategoryId) {
         // 处理分页
         PageHelper.startPage(pageNo, pageSize);
-        List<Accident> accidents = accidentMapper.selectAccidentById(accident_category_id);
+        List<Accident> accidents = accidentMapper.selectAllAccidentByCategoryId(accidentCategoryId);
         PageInfo<Accident> pageInfo = new PageInfo<Accident>(accidents);
         return new Pagination<Accident>(pageInfo.getTotal(), pageInfo.getList());
     }
@@ -112,5 +110,45 @@ public class AccidentServiceImpl implements AccidentService {
             return 0;
         }
         return 1;
+    }
+
+    @Override
+    public List<accidentInvestigationReport> queryAccidentInvestigationReportByAccidentId(String accidentId) {
+
+        List<accidentInvestigationReport> accidentReport = accidentMapper.selectAccidentInvestigationReportByAccidentId(accidentId);
+
+        return accidentReport;
+    }
+
+    @Override
+    public List<analysisOfTheCauseOfBehavior> queryAnalysisOfTheCauseOfBehaviorByAccidentId(String accidentId) {
+
+        List<analysisOfTheCauseOfBehavior> accidentReason = accidentMapper.selectAnalysisOfTheCauseOfBehaviorByAccidentId(accidentId);
+
+        return accidentReason;
+    }
+
+    @Override
+    public List<macroscopicLawOfAccident> queryMacroscopicLawOfAccidentByAccidentId(String accidentId) {
+
+        List<macroscopicLawOfAccident> accidentMacroscopic = accidentMapper.selectMacroscopicLawOfAccidentByAccidentId(accidentId);
+
+        return accidentMacroscopic;
+    }
+
+    @Override
+    public List<preventionAndControlMeasures> queryPreventionAndControlMeasuresByAccidentId(String accidentId) {
+
+        List<preventionAndControlMeasures> accidentPreventionAndControl= accidentMapper.selectPreventionAndControlMeasuresByAccidentId(accidentId);
+
+        return accidentPreventionAndControl;
+    }
+
+    @Override
+    public List<statisticsOfReasons> queryStatisticsOfReasonsByAccidentId(String accidentId) {
+
+        List<statisticsOfReasons> accidentStatisticsOfReasons= accidentMapper.selectStatisticsOfReasonsByAccidentId(accidentId);
+
+        return accidentStatisticsOfReasons;
     }
 }

@@ -10,6 +10,7 @@ $(function(){
         /*"accident_category_id": 1,*/
         /*"adposType": 3*/
     };
+    alert("加载数据...");
     $.ajax({
         /*url : 'http://localhost:8080/security/Accident/queryAccidentById',*/
         url : 'http://localhost:8080/security/Accident/queryAllAccident',
@@ -26,22 +27,10 @@ $(function(){
 
 });
 
-/*//加载储罐区列表
- /!*var worksiteid = $("#worksiteid").val();*!/
- function jiaZai(){
- var pageopt = $('#accident_datagrid').datagrid('getPager').data("pagination").options;
- var page=pageopt.pageNumber;
- var row=pageopt.pageSize;
- /!*url:'http://localhost:8080/security/Accident/queryAllAccidentcategory?pageSize=5&pageNo=1',method:'get'*!/
- $('#accident_datagrid').datagrid({
- url : 'http://localhost:8080/security/Accident/queryAllAccident',
- method: 'post',
- queryParams:{
- pageNo : page,
- pageSize : row
- }
- });
- }*/
+
+
+
+
 
 //查看详情
 function details(value,rowData,rowIndex){
@@ -89,11 +78,15 @@ function main_accident_delete(){
 
 function mainaccidentSave(){
     alert("保存");
-    $("#accidentName").val();
-    $("#occurrencePlace").val();
-    $("#isAnalysis").val();
-    $("#occurrenceTime").val();
-
+    $("#tank_TCSJ").val(formatDatebox(list[0].tank_TCSJ));
+    $("#tank_TCSJ").val();
+    $("#tank_TCSJ").val();
+    $("#tank_TCSJ").val();
+    $("#tank_TCSJ").val();
+    $("#tank_TCSJ").val();
+    $("#tank_TCSJ").val();
+    $("#tank_TCSJ").val();
+    $("#tank_TCSJ").val();
     param = {
         "map": {}
     };

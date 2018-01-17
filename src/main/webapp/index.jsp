@@ -5,19 +5,17 @@
         <meta charset="UTF-8">
         <title>安全生产事故及控制平台</title>
 
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <link rel="stylesheet" type="text/css" href="css/base.css">
         <link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/themes/default/easyui.css">
         <link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/themes/icon.css">
         <link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/themes/icons">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/base.css">
 
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/WdatePicker.js"></script>
-        <script type="text/javascript" src="js/Util.js"></script>
         <script type="text/javascript" src="js/jquery-easyui-1.4.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
         <script type="text/javascript" src="js/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
-
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/WdatePicker.js"></script>
 
         <style type="text/css"></style>
         <script></script>
@@ -109,7 +107,7 @@
                             </td>
                             <td>
                                 <div class="inputvalue">
-                                    <input type="text" id="occurrenceTime" name="occurrenceTime"class="easyui-datetimebox" data-options="required:true" style="width:130px;border:1px solid red;"/>
+                                    <input type="text" id="occurrenceTime" name="occurrenceTime" class="easyui-validatebox" readonly="readonly" value="${dw.pubilshdate}" type="text" size="40"  onclick="WdatePicker({lang:'zh-cn'})" data-options="required:true" style="width:130px;border:1px solid red;"/>
                                 </div>
                             </td>
                         </tr>
