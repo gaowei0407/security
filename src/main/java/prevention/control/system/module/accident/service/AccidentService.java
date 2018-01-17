@@ -27,6 +27,12 @@ public interface AccidentService {
     Pagination<Accident> queryAllAccident(int pageSize,int PageNo);
 
     /**
+     * 根据事故类型   查询事故基本信息
+     * @return
+     */
+    Pagination<Accident> selectAccidentById(int pageSize,int PageNo,String accident_category_id);
+
+    /**
      * 根据事故名称查询事故基本信息
      * @return
      */

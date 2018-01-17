@@ -26,6 +26,12 @@ public interface AccidentMapper {
     List<Accident>  selectAllAccident();
 
     /**
+     * 根据事故类型   查询事故基本信息
+     * @return
+     */
+    List<Accident>  selectAccidentById(@Param("accident_category_id") String accident_category_id);
+
+    /**
      * 根据事故名称查询事故基本信息
      * @return
      */

@@ -47,6 +47,15 @@ public class AccidentServiceImpl implements AccidentService {
     }
 
     @Override
+    public Pagination<Accident> selectAccidentById(int pageSize, int pageNo, String accident_category_id) {
+        // 处理分页
+        PageHelper.startPage(pageNo, pageSize);
+        List<Accident> accidents = accidentMapper.selectAccidentById(accident_category_id);
+        PageInfo<Accident> pageInfo = new PageInfo<Accident>(accidents);
+        return new Pagination<Accident>(pageInfo.getTotal(), pageInfo.getList());
+    }
+
+    @Override
     public Pagination<Accident> selectAccidentByName(int pageSize, int pageNo, String accidentName) {
         // 处理分页
         PageHelper.startPage(pageNo, pageSize);

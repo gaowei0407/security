@@ -69,6 +69,28 @@ public class AccidentController {
         return result;
     }
 
+    @RequestMapping("/queryAccidentById")
+    public Result queryAccidentById(@RequestBody(required = false) RequestParams requestParams){
+        // 获取当前方法名
+        String method = Thread.currentThread() .getStackTrace()[1].getMethodName();
+        Result result = new Result(method);
+        Map<String, Object> map = requestParams.getMap();
+        if (Objects.isNull(map.get("pageSize")) || Objects.isNull(map.get("pageNo"))||Objects.isNull(map.get("accident_category_id"))) {
+            result.paramsError(ResultCodeMessage.PARAMS_FAIL_MESSAGE);
+            return result;
+        }
+        System.out.print("method" + method);
+        int pageSize = Integer.parseInt(map.get("pageSize").toString());
+        int pageNo = Integer.parseInt(map.get("pageNo").toString());
+        String accident_category_id=map.get("accident_category_id").toString();
+        Pagination<Accident> accidentPagination = accidentService.selectAccidentByName(pageSize,pageNo,accident_category_id);
+        Map<String, Object> paramsList = new HashMap<>();
+        paramsList.put("allaccidentcategory", accidentPagination);
+        result.setData(paramsList);
+        result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
+        return result;
+    }
+
     @RequestMapping("/queryAccidentByName")
     public Result queryAccidentByName(@RequestBody(required = false) RequestParams requestParams){
         // 获取当前方法名

@@ -5,6 +5,10 @@
         SELECT * FROM t_accident_category
     </select>
 
+    <select id="selectAccidentById"  resultType="prevention.control.system.module.accident.entity.Accident">
+        SELECT * FROM t_accident WHERE accident_category_id = {#accident_category_id}
+    </select>
+
     <select id="selectAllAccident"  resultType="prevention.control.system.module.accident.entity.Accident">
         SELECT * FROM t_accident
     </select>
