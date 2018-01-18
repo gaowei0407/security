@@ -1,6 +1,21 @@
 
 
+
+
+
+//预加载事件
 $(function(){
+
+    //加载首页表单
+    load_home_datagrid();
+
+});
+
+
+
+
+//加载首页表单
+function load_home_datagrid(){
     param = {
         "map": {}
     };
@@ -12,112 +27,116 @@ $(function(){
     };
     alert("加载数据...");
     $.ajax({
-        /*url : 'http://localhost:8080/security/Accident/queryAccidentById',*/
         url : 'http://localhost:8080/security/Accident/queryAllAccident',
         type : "POST",
         data: JSON.stringify(param),
         dataType: 'json',
         contentType:'application/json;charset=UTF-8',
         success : function(result) {
-            /*console.log(JSON.stringify(result));*/
             var data_dadagrid = result.result.data.accidentList.list;
             $('#accident_datagrid').datagrid('loadData', data_dadagrid);
         }
     });
-
-});
-
+}
 
 
 
 
 
-//查看详情
+//查看详情  事件
 function details(value,rowData,rowIndex){
     var str = "<a href='javascript:void(0)' onclick='danger_Details(&apos;" + rowData.accidentId+ "&apos;)'>"+ rowData.accidentName +"</a>";
     return str;
 }
 
 function danger_Details(accident) {
-
     param = {
         "map": {}
     };
     param.map = {
         "pageNo": 1,
         "pageSize": 15
-        /*"accident_category_id": 1,*/
-        /*"adposType": 3*/
     };
     $.ajax({
-        /*url : 'http://localhost:8080/security/Accident/queryAccidentById',*/
         url : 'http://localhost:8080/security/Accident/queryAllAccident',
         type : "POST",
         data: JSON.stringify(param),
         dataType: 'json',
         contentType:'application/json;charset=UTF-8',
         success : function(result) {
-            /*console.log(JSON.stringify(result));*/
             var data_dadagrid = result.result.data.accidentList.list;
             $('#accidentBaseInfo_datagrid').datagrid('loadData', data_dadagrid);
         }
     });
     $('#w').window('open');
-    /*<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#w').window('open')">Open</a>
-     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#w').window('close')">Close</a>*/
-    /*alert(accident);*/
 }
 
+
+
+
+//=======重大事故   添加并打开添加页面按钮
 function main_accident_add(){
     $('#main_accident_add_window').window('open');
 }
 
+
+
+
+//=======重大事故   删除按钮
 function main_accident_delete(){
     alert("删除");
 }
 
-function mainaccidentSave(){
+
+
+
+//=======重大事故  添加并保存数据按钮
+function main_accident_Save(){
     alert("保存");
-    $("#tank_TCSJ").val(formatDatebox(list[0].tank_TCSJ));
-    $("#tank_TCSJ").val();
-    $("#tank_TCSJ").val();
-    $("#tank_TCSJ").val();
-    $("#tank_TCSJ").val();
-    $("#tank_TCSJ").val();
-    $("#tank_TCSJ").val();
-    $("#tank_TCSJ").val();
-    $("#tank_TCSJ").val();
+    var accidentName = $("#accidentName").val();
+    var occurrencePlace = $("#occurrencePlace").val();
+    var isAnalysis = $("#isAnalysis").val();
+    var occurrenceTime = $("#occurrenceTime").val();
+    alert("accidentName: " + accidentName + ",occurrencePlace: " + occurrencePlace + ",isAnalysis: " + isAnalysis + ",occurrenceTime: " + occurrenceTime );
+    var datas = $('#main_accident_add_Form').serialize();
+    alert("datas: " + datas);
     param = {
         "map": {}
     };
     param.map = {
-        "accidentName": "10",
-        "occurrencePlace":"1",
+        "accidentName": accidentName,
+        "occurrencePlace" : occurrencePlace,
         "occurrenceTime": "2018-02-26 15:34:16",
-        "isAnalysis":"1",
-        "userId": "10",
+        "isAnalysis": isAnalysis,
+        "userId": "1",
         "accidentCategoryId":"1",
-        "reportContent": "10",
-        "behaviorContent":"1",
-        "macroscopicContent": "10",
-        "measuresContent":"1",
-        "reasonsContent":"1"
+        "reportContent": "100",
+        "behaviorContent":"100",
+        "macroscopicContent": "100",
+        "measuresContent":"100",
+        "reasonsContent":"100"
     };
 
     $.ajax({
         type: "POST",
         /*data:$('#main_accident_add_Form').serialize(),// 序列化表单值*/
         data: JSON.stringify(param),
-        url : 'http://localhost:8080/security/Accident/queryAllAccident',
-        onSubmit:function(){
-            return $(this).form('validate');
-        },
+        dataType: 'json',
+        contentType:'application/json;charset=UTF-8',
+        url : 'http://localhost:8080/security/Accident/addAccident',
         success : function (data){
-                $.messager.alert("提示信息",data,"info");
+                if(data.result.data.isSuccess == "1"){
+                    $.messager.alert("提示信息",data.result.subMessage,"info");
+                    $('#main_accident_add_window').window('close');
+                }
         }
     });
 }
 
+
+
+
+//=======重大事故  取消并关闭按钮
 function main_accident_Cancel(){
     alert("取消");
 }
