@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    @Override
+    public User queryUserInfoByIdAndPwd(String userName, String password) {
+        return userMapper.selectUserInfoByIdAndPwd(userName,password);
+    }
 }

@@ -35,4 +35,12 @@ public interface UserMapper {
      * @return
      */
     int registerUserInfo( @Param("userName") String userName, @Param("password") String password);
+
+    /**
+     * 根据用户名字和密码查询用户信息
+     * @param userName
+     * @param password
+     * @return
+     */
+    User selectUserInfoByIdAndPwd(@Param("userName") String  userName,@Param("password") String password);
 }

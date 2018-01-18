@@ -25,7 +25,7 @@
         insert into t_user(user_name,password) value (#{userName},#{password})
     </insert>
 
-    <insert id="save" useGeneratedKeys="true" keyProperty="userId">
-        
-    </insert>
+    <select id="selectUserInfoByIdAndPwd" parameterType="java.lang.Integer" resultType="prevention.control.system.module.user.entity.User">
+        SELECT * FROM t_user WHERE user_name = #{userName} and password=#{password}
+    </select>
 </mapper>
