@@ -31,4 +31,10 @@ public interface UserService {
      * @return
      */
     boolean registerUserInfo( String userName, String password);
+
+    /**
+     * 根据用户名和密码查询用户名字是否存在
+     * @return
+     */
+    User queryUserInfoByIdAndPwd(String userName, String password);
 }
