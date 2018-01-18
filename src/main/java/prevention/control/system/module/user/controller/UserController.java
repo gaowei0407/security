@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.converter.ObjectToStringHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,9 @@ import prevention.control.system.module.user.service.UserService;
 import prevention.control.system.module.user.service.impl.UserServiceImpl;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -124,6 +128,34 @@ public class UserController {
             result.setSubMessage(ResultCodeMessage.EXECUTE_FAIL_MESSAGE);
         }
         result.executeSuccess(ResultCodeMessage.ADD_SUCCESS_MESSAGE);
+        return result;
+    }
+
+    @RequestMapping("/queryUserInfoByNameAndPwd")
+    public Result queryUserInfoByNameAndPwd(@RequestBody(required = false) RequestParams requestParams, HttpServletRequest request, HttpServletResponse response){
+        // 获取当前方法名
+        String method = Thread.currentThread() .getStackTrace()[1].getMethodName();
+        Result result = new Result(method);
+        Map<String, Object> map = requestParams.getMap();
+        if (Objects.isNull(map.get("userName"))|| Objects.isNull(map.get("password"))) {
+            result.paramsError(ResultCodeMessage.PARAMS_FAIL_MESSAGE);
+            return result;
+        }
+        String userName = map.get("userName").toString();
+        String password = map.get("password").toString();
+        User user = userService.queryUserInfoByIdAndPwd(userName, password);
+        if(user == null) {
+            result.paramsError(ResultCodeMessage.USER_NO_EXIST_MESSAGE);
+            return result;
+        }
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        //使用request对象的getSession()获取session，如果session不存在则创建一个
+        HttpSession session = request.getSession();
+        //将数据存储到session中
+        session.setAttribute("userId", user.getUserId());
+        session.setAttribute("userName", user.getUserName());
+        result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
         return result;
     }
 }
