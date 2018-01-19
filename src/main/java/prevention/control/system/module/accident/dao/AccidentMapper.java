@@ -104,4 +104,44 @@ public interface AccidentMapper {
      */
     List<statisticsOfReasons>  selectStatisticsOfReasonsByAccidentId(@Param("accidentId") String accidentId);
 
+
+    /**
+     * 根据事故id删除事故基本信息
+     * @return
+     */
+    int  deleteAccidentById(@Param("accidentId") String accidentId);
+
+    /**
+     * 根据事故id删除事故报告
+     * @return
+     */
+    int  deleteAccidentReportById(@Param("accidentId") String accidentId);
+
+    /**
+     * 根据事故id删除事故发生原因
+     * @return
+     */
+    int  deleteAccidentBehaviorById(@Param("accidentId") String accidentId);
+
+    /**
+     * 根据事故id删除事故发生宏观规律
+     * @return
+     */
+    int  deleteAccidentMacroscopicLawOfById(@Param("accidentId") String accidentId);
+
+    /**
+     * 根据事故id删除事故预防措施
+     * @return
+     */
+    int  deleteAccidentPreventionAndControlById(@Param("accidentId") String accidentId);
+
+    /**
+     * 根据事故id删除事故发生原因规律统一
+     * @return
+     */
+    int  deleteAccidentReasonsById(@Param("accidentId") String accidentId);
+
+
+
+
 }

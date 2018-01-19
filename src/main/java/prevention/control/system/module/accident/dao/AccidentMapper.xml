@@ -58,6 +58,30 @@
     <select id="selectStatisticsOfReasonsByAccidentId" resultType="prevention.control.system.module.accident.entity.statisticsOfReasons">
         SELECT * FROM t_statistics_of_reasons where accident_id = #{accidentId}
     </select>
+    <delete id="deleteAccidentById">
+        DELETE FROM t_accident WHERE accident_id = #{accidentId}
+    </delete>
+
+    <delete id="deleteAccidentReportById">
+        DELETE FROM t_accident_investigation_report WHERE accident_id = #{accidentId}
+    </delete>
+
+    <delete id="deleteAccidentBehaviorById">
+        DELETE FROM t_analysis_of_the_cause_of_behavior WHERE accident_id = #{accidentId}
+    </delete>
+
+    <delete id="deleteAccidentMacroscopicLawOfById">
+        DELETE FROM t_macroscopic_law_of_accident WHERE accident_id = #{accidentId}
+    </delete>
+
+    <delete id="deleteAccidentPreventionAndControlById">
+    DELETE FROM t_prevention_and_control_measures WHERE accident_id = #{accidentId}
+</delete>
+
+    <delete id="deleteAccidentReasonsById">
+        DELETE FROM t_statistics_of_reasons WHERE accident_id = #{accidentId}
+    </delete>
+
 
 
 </mapper>
