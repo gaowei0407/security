@@ -16,25 +16,29 @@ public interface AccidentService {
 
     /**
      * 查询所有事故类别
+     *
      * @return
      */
-   List<AccidentCategory> queryAllAccidentCategory();
+    List<AccidentCategory> queryAllAccidentCategory();
 
 
     /**
      * 查询所有事故基本信息
+     *
      * @return
      */
     Pagination<Accident> queryAllAccident(int pageSize, int PageNo);
 
     /**
      * 事故类别id查询事故基本信息
+     *
      * @return
      */
     Pagination<Accident> queryAllAccidentByCategoryId(int pageSize, int PageNo, String accidentCategoryId);
 
     /**
      * 根据事故名称查询事故基本信息
+     *
      * @return
      */
     Pagination<Accident> selectAccidentByName(int pageSize, int PageNo, String accidentName);
@@ -42,6 +46,7 @@ public interface AccidentService {
 
     /**
      * 向数据库中添加一条事故
+     *
      * @param map
      * @return
      * @throws ParseException
@@ -50,31 +55,44 @@ public interface AccidentService {
 
     /**
      * 根据事故id查询事故调查报告
+     *
      * @return
      */
     List<accidentInvestigationReport> queryAccidentInvestigationReportByAccidentId(String accidentId);
 
     /**
      * 根据事故id查询事故发生原因
+     *
      * @return
      */
     List<analysisOfTheCauseOfBehavior> queryAnalysisOfTheCauseOfBehaviorByAccidentId(String accidentId);
 
     /**
      * 根据事故id查询事故宏观规律
+     *
      * @return
      */
-    List<macroscopicLawOfAccident>  queryMacroscopicLawOfAccidentByAccidentId(String accidentId);
+    List<macroscopicLawOfAccident> queryMacroscopicLawOfAccidentByAccidentId(String accidentId);
 
     /**
      * 根据事故id查询事故预防措施
+     *
      * @return
      */
-    List<preventionAndControlMeasures>  queryPreventionAndControlMeasuresByAccidentId(String accidentId);
+    List<preventionAndControlMeasures> queryPreventionAndControlMeasuresByAccidentId(String accidentId);
 
     /**
      * 根据事故id查询事故宏观规律统计
+     *
      * @return
      */
-    List<statisticsOfReasons>  queryStatisticsOfReasonsByAccidentId(String accidentId);
+    List<statisticsOfReasons> queryStatisticsOfReasonsByAccidentId(String accidentId);
+
+
+    /**
+     * 根据事故id删除整个事故
+     *
+     * @return
+     */
+    boolean deleteAccidentById(String accidentId);
 }

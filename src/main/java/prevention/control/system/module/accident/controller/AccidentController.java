@@ -241,4 +241,26 @@ public class AccidentController {
         result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
         return result;
     }
+
+
+
+    @RequestMapping("/deleteAccidentById")
+    public Result deleteAccidentById(@RequestBody(required = false) RequestParams requestParams){
+        // 获取当前方法名
+        String method = Thread.currentThread() .getStackTrace()[1].getMethodName();
+        Result result = new Result(method);
+        Map<String, Object> map = requestParams.getMap();
+        if (Objects.isNull(map.get("accidentId"))){
+            result.paramsError(ResultCodeMessage.PARAMS_FAIL_MESSAGE);
+            return result;
+        }
+        String accidentId=map.get("accidentId").toString();
+        boolean isSuccess = accidentService.deleteAccidentById(accidentId);
+        if (!isSuccess) {
+            result.executeSuccess(ResultCodeMessage.DELETE_FAILURE_MESSAGE);
+            return result;
+        }
+        result.executeSuccess(ResultCodeMessage.SUB_SUCCESS_MESSAGE);
+        return result;
+    }
 }
