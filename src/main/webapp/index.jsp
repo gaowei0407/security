@@ -67,9 +67,8 @@
              style="top:20%;width:60%;height:300px;padding:10px;;overflow: hidden">
             <form id="main_accident_add_Form"  method="post">
                 <div id="dialogarea">
-                    <input type="hidden" name="sWareHouse_Name" id="sWareHouse_Name" />
                     <!-- 	库区信息表 ID ，用于删除库区信息表数据时，级联删除 库房列表 信息	 -->
-                    <input type="hidden" name="warehouse_Delete_Id" id="warehouse_Delete_Id" />
+                    <%--<input type="hidden" name="warehouse_Delete_Id" id="warehouse_Delete_Id" />--%>
                     <table id="main_accident_add_table" border="1" cellpadding="1" cellspacing="1" style="border:1px solid red;width: 100%;height: 100%;font-size: 14px;color: #222222;font-family: 微软雅黑">
                         <tr>
                             <td>
@@ -107,7 +106,7 @@
                             </td>
                             <td>
                                 <div class="inputvalue">
-                                    <input type="text" id="occurrenceTime" name="occurrenceTime" class="easyui-validatebox" readonly="readonly" value="${dw.pubilshdate}" type="text" size="40"  onclick="WdatePicker({lang:'zh-cn'})" data-options="required:true" style="width:130px;border:1px solid red;"/>
+                                    <input type="text" id="occurrenceTime" name="occurrenceTime" class="easyui-datetimebox"  data-options="required:true" style="width:130px;border:1px solid red;"/>
                                 </div>
                             </td>
                         </tr>
@@ -116,7 +115,7 @@
                 </div>
             </form>
             <div style="float: right">
-                <button id="main_accident_Saves" onclick="mainaccidentSave()">
+                <button id="main_accident_Saves" onclick="main_accident_Save()">
                     保存
                 </button>
                 <button id="main_accident_Cancels" onclick="main_accident_Cancel()">
