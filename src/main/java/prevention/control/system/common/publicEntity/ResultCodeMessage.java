@@ -100,6 +100,10 @@ public class ResultCodeMessage {
 	public static final int PERMISSION_DENIED_CODE = 10011;
 	public static final String PERMISSION_DENIED_MESSAGE = "权限不足";
 
+	// 删除失败
+	public static final int DELETE_FAILURE_CODE = 10012;
+	public static final String DELETE_FAILURE_MESSAGE = "删除失败";
+
 	// ==用户中心 10501-10601
 	public static final int VIA_ERROR_CODE = 10501;
 	public static final String VIA_ERROR_MESSAGE = "验证码错误";
