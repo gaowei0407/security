@@ -22,7 +22,7 @@ table#main_accident_add_table tr td {
 	height: 30px;
 	width: 50%;
 	border:1px solid red;
-	background-color: red;
+	background-color: #7FFFD4;
 }
 
 table#main_accident_add_table{
