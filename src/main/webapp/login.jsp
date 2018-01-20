@@ -39,7 +39,7 @@
 </head>
 <body style="background-color: #C0C0C0">
     <div class="login" >
-        <h2>安全生产事故及控制平台</h2>
+        <h2 style="color: #E15748">安全生产事故及控制平台--登陆页面</h2>
         <div class="login-top">
             <h1>请登录...</h1>
             <form id="login_form">
@@ -47,12 +47,11 @@
                 <input id="password" type="text" value="请输入密码：" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请输入密码：';}">
             </form>
             <div class="forgot">
-                <a href="#">忘记密码</a>
                 <input type="submit" value="登陆" onclick="Login();">
             </div>
         </div>
         <div class="login-bottom">
-            <h3>新用户、请点击这里：&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">注册</a></h3>
+            <h3>新用户、请点击这里：&nbsp;&nbsp;&nbsp;&nbsp;<a href="regist.jsp">注册</a></h3>
         </div>
     </div>
 </body>
