@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>登陆页面</title>
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/login.css" rel="stylesheet" type="text/css" media="all"/>
     <script type="text/javascript" src="js/jquery-easyui-1.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="js/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
@@ -30,7 +30,7 @@
                     if(subCode == "10002"){
                         window.location.href = "index.jsp";
                     }else {
-                        alert("登陆失败...");
+                        alert("请输入正确的用户名和密码...");
                     }
                 }
             });
