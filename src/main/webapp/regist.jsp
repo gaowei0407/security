@@ -19,6 +19,10 @@
             var userName = $("#userName").val();
             var password = $("#password").val();
             var repassword = $("#repassword").val();
+            if(password != repassword){
+                alert("两次输入的密码必须一样...");
+                return;
+            }
             if(userName == null || userName == "" || password == null || password == "" || repassword == null || repassword == "" ) {
                 $.messager.alert("消息提醒", "你输入的数据不完整...", "warning");
                 return;
