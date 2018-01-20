@@ -9,6 +9,9 @@ $(function(){
 });
 
 
+function exitCurrent(){
+    window.location.href="login.jsp";
+}
 
 
 //加载首页表单
@@ -146,11 +149,11 @@ function danger_Details(accident) {
             $('#accidentBaseInfo_datagrid').datagrid('loadData', data_dadagrid);
         }
     });
-    accident_investigation_report_datagrid ();
-    macroscopic_law_of_accident_datagrid();
-    analysis_of_the_cause_of_behavior_datagrid();
-    statistics_of_reasons_datagrid ();
-    prevention_and_control_measures_datagrid();
+    accident_investigation_report_datagrid (accident);
+    macroscopic_law_of_accident_datagrid(accident);
+    analysis_of_the_cause_of_behavior_datagrid(accident);
+    statistics_of_reasons_datagrid (accident);
+    prevention_and_control_measures_datagrid(accident);
     $('#w').window('open');
 }
 
@@ -269,14 +272,14 @@ function main_accident_Cancel(){
 
 
 //加载    事故调查报告表单
-function accident_investigation_report_datagrid (){
+function accident_investigation_report_datagrid (accident){
     param = {
         "map": {}
     };
     param.map = {
         "pageNo": 1,
         "pageSize": 20,
-        "accidentId": 1
+        "accidentId": accident
     };
     $.ajax({
         url : 'http://localhost:8080/security/Accident/queryInvestigationReportByAccidentId',
@@ -294,14 +297,14 @@ function accident_investigation_report_datagrid (){
 
 
 //加载事物宏观规律表单
-function macroscopic_law_of_accident_datagrid (){
+function macroscopic_law_of_accident_datagrid (accident){
     param = {
         "map": {}
     };
     param.map = {
         "pageNo": 1,
         "pageSize": 20,
-        "accidentId": 1
+        "accidentId": accident
         /*"accidentId": accident_id*/
     };
     $.ajax({
@@ -319,14 +322,14 @@ function macroscopic_law_of_accident_datagrid (){
 
 
 //加载    行为原因分析表单
-function analysis_of_the_cause_of_behavior_datagrid (){
+function analysis_of_the_cause_of_behavior_datagrid (accident){
     param = {
         "map": {}
     };
     param.map = {
         "pageNo": 1,
         "pageSize": 20,
-        "accidentId": 1
+        "accidentId": accident
     };
     $.ajax({
         url : 'http://localhost:8080/security/Accident/queryAnalysisOfTheCauseOfBehaviorByAccidentId',
@@ -343,14 +346,14 @@ function analysis_of_the_cause_of_behavior_datagrid (){
 
 
 //加载    原因规律统计表单
-function statistics_of_reasons_datagrid (){
+function statistics_of_reasons_datagrid (accident){
     param = {
         "map": {}
     };
     param.map = {
         "pageNo": 1,
         "pageSize": 20,
-        "accidentId": 1
+        "accidentId": accident
     };
     $.ajax({
         url : 'http://localhost:8080/security/Accident/queryStatisticsOfReasonsByAccidentId',
@@ -367,14 +370,14 @@ function statistics_of_reasons_datagrid (){
 
 
 //加载    预防控制措施表单
-function prevention_and_control_measures_datagrid (){
+function prevention_and_control_measures_datagrid (accident){
     param = {
         "map": {}
     };
     param.map = {
         "pageNo": 1,
         "pageSize": 20,
-        "accidentId": 1
+        "accidentId": accident
     };
     $.ajax({
         url : 'http://localhost:8080/security/Accident/queryPreventionAndControlMeasuresByAccidentId',

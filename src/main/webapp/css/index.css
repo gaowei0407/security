@@ -2,10 +2,15 @@
 
 
 #north_title{
-	font-size: 30px;
+	font-size: 40px;
 	color: #fff;
 	text-align: center;
-	background: url(../images/title-banner.png) no-repeat ;
+	background-image: url(../images/title-banner.png) ;
+	background-size:100% 100%;
+	outline:none;
+	width:76px;
+	height:60px;
+	cursor:pointer;
 }
 #west_menus ul li{
 	font-size: 14px;

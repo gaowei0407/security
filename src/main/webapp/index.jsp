@@ -3,6 +3,11 @@
 <%
     Object userId = session.getAttribute("userId");
     Object userNames = session.getAttribute("userName");
+/*    System.out.print("userId: " + userId + ",userNames: " + userNames);*/
+    if(userId == null || userId == ""){
+        request.getRequestDispatcher("login.jsp").forward(request,response);
+        return;
+    }
 %>
 
 <!DOCTYPE html>
@@ -30,9 +35,9 @@
 
     <body class="easyui-layout">
         <input type="hidden" name="accident_Id" id="accident_Id"/>
-        <div id="north_title" data-options="region:'north',border:false" style="height:60px;padding:10px;">
+        <div id="north_title" data-options="region:'north',border:false" style="height:70px;padding-top:15px;">
             <span>安全生产事故及控制平台</span>
-            <div>登录用户：<%=userNames%></div>
+            <div class="fr" style="height:70px;padding:10px;"   >登录用户：<%=userNames%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="exitCurrent()">退出</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
         </div>
 
         <div id="west_menus" data-options="region:'west',split:true,title:'菜单'" style="width:240px;padding:10px;">
@@ -221,8 +226,8 @@
                                 <thead>
                                 <tr>
                                     <th data-options="field:'checkbox',checkbox:true" style="width:2%" align="center"></th>
-                                    <th data-options="field:'accidentInvestigationReportId'" style="width:10%" align="center"></th>
-                                    <th data-options="field:'accidentId'" style="width:15%" align="center">事故id</th>
+                                    <th data-options="field:'accidentInvestigationReportId',hidden:'true'" style="width:10%" align="center"></th>
+                                    <th data-options="field:'accidentId',hidden:'true'" style="width:15%" align="center">事故id</th>
                                     <th data-options="field:'content'" style="width:70%" align="center">事故名称</th>
                                 </tr>
                                 </thead>
@@ -235,8 +240,8 @@
                                 <thead>
                                     <tr>
                                         <th data-options="field:'checkbox',checkbox:true" style="width:2%" align="center"></th>
-                                        <th data-options="field:'macroscopicLawOfAccidentId'" style="width:10%" align="center"></th>
-                                        <th data-options="field:'accidentId'" style="width:15%" align="center">事故id</th>
+                                        <th data-options="field:'macroscopicLawOfAccidentId',hidden:'true'" style="width:10%" align="center"></th>
+                                        <th data-options="field:'accidentId',hidden:'true'" style="width:15%" align="center">事故id</th>
                                         <th data-options="field:'content'" style="width:70%" align="center">事故名称</th>
                                     </tr>
                                 </thead>
@@ -249,8 +254,8 @@
                                 <thead>
                                 <tr>
                                     <th data-options="field:'checkbox',checkbox:true" style="width:2%" align="center"></th>
-                                    <th data-options="field:'analysisOfTheCauseOfBehaviorId'" style="width:10%" align="center">id</th>
-                                    <th data-options="field:'accidentId'" style="width:15%" align="center">事故类别id</th>
+                                    <th data-options="field:'analysisOfTheCauseOfBehaviorId',hidden:'true'" style="width:10%" align="center">id</th>
+                                    <th data-options="field:'accidentId',hidden:'true'" style="width:15%" align="center">事故类别id</th>
                                     <th data-options="field:'content'" style="width:70%" align="center">内容</th>
                                 </tr>
                                 </thead>
@@ -263,8 +268,8 @@
                                 <thead>
                                 <tr>
                                     <th data-options="field:'checkbox',checkbox:true" style="width:2%" align="center"></th>
-                                    <th data-options="field:'statisticsOfReasonsId'" style="width:10%" align="center">id</th>
-                                    <th data-options="field:'accidentId'" style="width:15%" align="center">事故类别id</th>
+                                    <th data-options="field:'statisticsOfReasonsId',hidden:'true'" style="width:10%" align="center">id</th>
+                                    <th data-options="field:'accidentId',hidden:'true'" style="width:15%" align="center">事故类别id</th>
                                     <th data-options="field:'content'" style="width:70%" align="center">内容</th>
                                 </tr>
                                 </thead>
@@ -277,8 +282,8 @@
                                 <thead>
                                 <tr>
                                     <th data-options="field:'checkbox',checkbox:true" style="width:2%" align="center"></th>
-                                    <th data-options="field:'preventionAndControlMeasuresId'" style="width:10%" align="center">id</th>
-                                    <th data-options="field:'accidentId'" style="width:15%" align="center">事故类别id</th>
+                                    <th data-options="field:'preventionAndControlMeasuresId',hidden:'true'" style="width:10%" align="center">id</th>
+                                    <th data-options="field:'accidentId',hidden:'true'" style="width:15%" align="center">事故类别id</th>
                                     <th data-options="field:'content'" style="width:70%" align="center">内容</th>
                                 </tr>
                                 </thead>
